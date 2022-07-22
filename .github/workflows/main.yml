@@ -14,5 +14,5 @@ jobs:
     
     - run: 
          az vm run-command invoke  --command-id RunPowerShellScript --name test -g test \
-         --scripts @test.ps1
+         --scripts .\test.ps1
     
