@@ -12,7 +12,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
-    - run: |   
+    - run:   
         az vm run-command invoke \
           --resource-group 'rg-test' \
           --name 'test' \
