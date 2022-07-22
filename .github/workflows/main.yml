@@ -1,0 +1,20 @@
+on: [push]
+
+name: AzureLoginSample
+
+jobs:
+
+  build-and-deploy:
+    runs-on: windows-latest
+    steps:
+    -  uses: actions/checkout@v1     
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - run: |   
+        az vm run-command invoke \
+         --resource-group 'test' \
+         --name 'test' \
+         --command-id 'RunPowerShellScript' \
+         --scripts @C:\\ps\\test.ps1
