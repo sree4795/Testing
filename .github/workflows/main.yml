@@ -1,16 +1,24 @@
-on: [push]
+name: Windows
 
-name: AzureLoginSample
+on:
+  push:
+    branches:
+    - main
 
 jobs:
-
-  build-and-deploy:
+  test:
     runs-on: windows-latest
     steps:
-    -  uses: actions/checkout@v1     
-    - uses: azure/login@v1
+    - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    
-    - run:      
-        az vm run-command invoke --resource-group 'test' --name 'test' --command-id 'RunPowerShellScript' --scripts ./test.ps1
+        SSHKEY: ${{ secrets.SSH_GITHUB }}
+    - run: ssh -T git@github.com || true
+    - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
+      with:
+        ORIGIN: ${{ secrets.HOST }}
+        SSHKEY: ${{ secrets.SSH_SERVER }}
+        NAME: production
+        PORT: ${{ secrets.PORT }}
+        USER: azadmin
+    - run: 
+         New-Item -Path 'C:\Test Folder' -ItemType Directory
