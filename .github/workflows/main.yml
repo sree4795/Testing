@@ -13,8 +13,8 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |   
-          az vm run-command invoke \
-            --resource-group 'test' \
-            --name 'test' \
-            --command-id 'RunPowerShellScript' \
-            --scripts @C:\\ps\\test.ps1
+        Invoke-AzVmRunCommand `
+             -ResourceGroupName "test" `
+             -VMName "test" `
+             -CommandId "RunPowerShellScript" `
+             -ScriptPath "./test.ps1"
