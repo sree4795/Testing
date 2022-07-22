@@ -13,8 +13,8 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |   
-        $fileUris = @("https://raw.https://github.com/sree4795/Testing.git/test.ps1")
-        $protectedSettings = @{
-               "fileUris" = $fileUris
-               "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File test.ps1"    
-}
+         $fileUris = @("https://raw.https://github.com/sree4795/Testing.git/test.ps1")
+         $protectedSettings = @{
+                "fileUris" = $fileUris
+                "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File test.ps1"    
+                 }
