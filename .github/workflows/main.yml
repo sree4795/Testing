@@ -13,8 +13,8 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |   
-        Invoke-AzVmRunCommand `
-             -ResourceGroupName "test" `
-             -VMName "test" `
-             -CommandId "RunPowerShellScript" `
-             -ScriptPath "./test.ps1"
+        $fileUris = @("https://raw.https://github.com/sree4795/Testing.git/test.ps1")
+        $protectedSettings = @{
+               "fileUris" = $fileUris
+               "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File test.ps1"    
+}
